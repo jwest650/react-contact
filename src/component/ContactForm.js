@@ -43,7 +43,7 @@ const ContactForm = ({ details, display }) => {
                     <input
                         type="text"
                         id="contact"
-                        placeholder="Write your name here"
+                        placeholder="Write your Contact here"
                         className="border bg-inherit w-full outline-none pl-2 border-b-[#97848c]"
                         value={contact}
                         onChange={(e) => setcontact(e.target.value)}
@@ -55,7 +55,7 @@ const ContactForm = ({ details, display }) => {
                     <input
                         type="text"
                         id="location"
-                        placeholder="Write your name here"
+                        placeholder="Write Location here"
                         className="border bg-inherit outline-none border-b-[#97848c] pl-2 w-full"
                         value={location}
                         onChange={(e) => setloacation(e.target.value)}
