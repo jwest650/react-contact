@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Contact from "./component/Contact";
+import ContactForm from "./component/ContactForm";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    let [displaycontact, setdisplaycontact] = useState(false);
+    const [details, setdetails] = useState([]);
+    console.log(displaycontact);
+    console.log(details);
+    return (
+        <div className="bg-[#59abe3] p-5 h-screen  ">
+            <ContactForm details={setdetails} display={setdisplaycontact} />
+            {displaycontact ? <Contact contacts={details} /> : null}
+        </div>
+    );
 }
 
 export default App;
