@@ -1,30 +1,29 @@
 import React, { useState } from "react";
-
-const ContactForm = ({ details, display }) => {
+import { v4 as uuid } from "uuid";
+const ContactForm = ({ updated }) => {
     const [name, setname] = useState("");
     const [contact, setcontact] = useState("");
-    const [location, setloacation] = useState("");
+    const [location, setlocation] = useState("");
 
-    function setInfo(e) {
+    function newDetail(e) {
         e.preventDefault();
-        let user = {
-            name: name,
-            contact: contact,
-            location: location,
+        const newUser = {
+            name,
+            contact,
+            location,
+            id: uuid(),
         };
-        details((prev) => [...prev, user]);
-        setname("");
-        setcontact("");
-        display(true);
-        setloacation("");
+
+        updated((prev) => [...prev, newUser]);
     }
+
     return (
-        <div className="w-[30%] bg-[#e6e6e6] mx-auto p-10 shadow-lg shadow-[#141414]  rounded-lg  capitalize  space-y-5">
+        <div className="w-[30%] bg-[#e6e6e6]  p-10 shadow-lg shadow-[#141414]  rounded-lg  capitalize  space-y-5 mr-8">
             <header className="w-fit uppercase text-lg text-[#97848c]">
                 <h1>Contacts</h1>
                 <hr className="border border-[#97848c]" />
             </header>
-            <form action="" onSubmit={setInfo} className="space-y-7">
+            <form action="" onSubmit={newDetail} className="space-y-7">
                 <div>
                     <label htmlFor="name">Name</label>
                     <br />
@@ -58,13 +57,14 @@ const ContactForm = ({ details, display }) => {
                         placeholder="Write Location here"
                         className="border bg-inherit outline-none border-b-[#97848c] pl-2 w-full"
                         value={location}
-                        onChange={(e) => setloacation(e.target.value)}
+                        onChange={(e) => setlocation(e.target.value)}
                     />
                 </div>
                 <div className="w-30% text-right p-3 pr-0">
                     <button
                         type="submit"
                         className="border border-[#97848c] px-5 py-2 "
+                        onClick={newDetail}
                     >
                         Add Contact
                     </button>
