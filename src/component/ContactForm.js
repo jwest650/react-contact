@@ -14,7 +14,7 @@ const ContactForm = ({ updated }) => {
             id: uuid(),
         };
 
-        updated((prev) => [...prev, newUser]);
+        updated(newUser);
     }
 
     return (

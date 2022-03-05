@@ -1,49 +1,24 @@
 import { useState } from "react";
 import Contact from "./component/Contact";
 import ContactForm from "./component/ContactForm";
-import { v4 as uuid } from "uuid";
+import { useSelector, useDispatch } from "react-redux";
 function App() {
-    const [details, setdetails] = useState([
-        { name: "adwoa", contact: "0055523688", location: "tema", id: uuid() },
-        {
-            name: "joseph",
-            contact: "4785222139",
-            location: "legon",
-            id: uuid(),
-        },
-        {
-            name: "trusty",
-            contact: "0179258745",
-            location: "accra",
-            id: uuid(),
-        },
-        {
-            name: "prince",
-            contact: "5411258745",
-            location: "kumasi",
-            id: uuid(),
-        },
-        {
-            name: "tony",
-            contact: "8911258745",
-            location: "mamobi",
-            id: uuid(),
-        },
-    ]);
+    const details = useSelector((state) => state);
+    const dispatch = useDispatch();
     function Edit(id, edited) {
-        const updates = details.map((detail) => {
-            return detail.id === id ? edited : detail;
-        });
-        setdetails(updates);
+        dispatch({ type: "EDIT_USER", payload: { id, edited } });
     }
     function Delete(id) {
-        const filtered = details.filter((filter) => id !== filter.id);
-        setdetails(filtered);
+        dispatch({ type: "REMOVE_USER", data: id });
+    }
+
+    function ADD(data) {
+        dispatch({ type: "ADD", data: data });
     }
 
     return (
         <div className=" p-5 h-full flex items-start">
-            <ContactForm updated={setdetails} />
+            <ContactForm updated={ADD} />
             <Contact details={details} Delete={Delete} edits={Edit} />
         </div>
     );
