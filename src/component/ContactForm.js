@@ -1,20 +1,26 @@
-import React, { useState } from "react";
-import { v4 as uuid } from "uuid";
-const ContactForm = ({ updated }) => {
+import React, { useEffect, useState } from "react";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+const ContactForm = () => {
     const [name, setname] = useState("");
     const [contact, setcontact] = useState("");
     const [location, setlocation] = useState("");
 
-    function newDetail(e) {
+    async function newDetail(e) {
         e.preventDefault();
         const newUser = {
             name,
             contact,
             location,
-            id: uuid(),
+            created: Timestamp.now(),
         };
-
-        updated(newUser);
+        let refs = collection(db, "contact");
+        await addDoc(refs, {
+            ...newUser,
+        });
+        setcontact("");
+        setname("");
+        setlocation("");
     }
 
     return (

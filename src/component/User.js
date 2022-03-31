@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import Modal from "./Modal";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
 
-const User = ({ user, Delete, edits }) => {
+const User = ({ user }) => {
     const [show, setshow] = useState(false);
     function edit() {
         setshow(true);
+    }
+
+    async function Delete(id) {
+        const refs = doc(db, "contact", id);
+        await deleteDoc(refs);
     }
 
     return (
@@ -39,7 +46,7 @@ const User = ({ user, Delete, edits }) => {
                     </div>
                 </div>
             </div>
-            {show && <Modal user={user} edits={edits} setshow={setshow} />}
+            {show && <Modal user={user} setshow={setshow} />}
         </>
     );
 };

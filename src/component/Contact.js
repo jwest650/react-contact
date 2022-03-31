@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import User from "./User";
 
 const Contact = ({ details, Delete, edits }) => {
