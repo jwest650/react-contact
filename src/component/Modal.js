@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-
-const Modal = ({ user, edits, setshow }) => {
+import { updateDoc, doc } from "firebase/firestore";
+import { db } from "../firebase/firebase";
+const Modal = ({ user, setshow }) => {
     const [name, setname] = useState(user.name);
     const [contact, setcontact] = useState(user.contact);
     const [location, setlocation] = useState(user.location);
@@ -11,8 +12,11 @@ const Modal = ({ user, edits, setshow }) => {
         id: user.id,
     };
 
-    function newEdits() {
-        edits(edited.id, edited);
+    async function newEdits() {
+        let refs = doc(db, "contact", edited.id);
+        await updateDoc(refs, {
+            ...edited,
+        });
         setshow(false);
     }
 
