@@ -1,5 +1,6 @@
-const initial = [];
-export const reducer = (state = initial, action) => {
+const initialState = [];
+
+const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case "fetch":
             return [...action.payload];
@@ -8,3 +9,15 @@ export const reducer = (state = initial, action) => {
             return state;
     }
 };
+const userAuth = (state = { user: null }, action) => {
+    switch (action.type) {
+        case "login":
+            return { user: action.payload };
+        case "logout":
+            return { user: action.payload };
+        default:
+            return state;
+    }
+};
+
+export { userAuth, userReducer };

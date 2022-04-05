@@ -70,7 +70,6 @@ const ContactForm = () => {
                     <button
                         type="submit"
                         className="border border-[#97848c] px-5 py-2 "
-                        onClick={newDetail}
                     >
                         Add Contact
                     </button>

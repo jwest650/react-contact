@@ -1,3 +1,19 @@
-import { createStore } from "redux";
-import { reducer } from "./reducer";
-export const store = createStore(reducer);
+import { createStore, combineReducers } from "redux";
+import { userAuth, userReducer } from "./reducer";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+const persistConfig = {
+    key: "root",
+    storage,
+    blacklist: "user",
+};
+const reducer = combineReducers({
+    auth: userAuth,
+    user: userReducer,
+});
+const persistedReducer = persistReducer(persistConfig, reducer);
+
+const store = createStore(persistedReducer);
+const persistor = persistStore(store);
+
+export { store, persistor };

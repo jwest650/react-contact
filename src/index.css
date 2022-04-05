@@ -12,3 +12,19 @@ body {
     height: 100%;
     background-color: #59abe3;
 }
+.dash {
+    position: absolute;
+    top: 10px;
+    right: 0;
+}
+.dash button {
+    display: block;
+    background-color: rgba(0, 255, 98, 0.644);
+    color: white;
+    border: none;
+    text-transform: capitalize;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-left: auto;
+    margin-right: 20px;
+}
